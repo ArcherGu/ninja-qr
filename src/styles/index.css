@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis:700,600");
+@import "element-plus/theme-chalk/el-message.css";
+
+body,
+html,
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  font-family: Dosis, "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: linear-gradient(0deg, #18161a 0%, #3f0b8f 100%);
+}
+
+:root {
+  --el-font-family: Dosis, "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+button {
+  font-family: var(--el-font-family);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(208, 208, 208, 0.3);
+  border-radius: 4px;
+}
+
+:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(208, 208, 208, 0.6);
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.el-checkbox {
+  @apply origin-top-left scale-125;
+}
