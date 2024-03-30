@@ -7,9 +7,7 @@
   "author": "ArcherGu (https://github.com/ArcherGu/)",
   "license": "MIT",
   "keywords": [
-    "icon",
-    "editor",
-    "generator"
+    "qrcode"
   ],
   "scripts": {
     "dev": "vite",
