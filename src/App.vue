@@ -23,7 +23,7 @@ const editorSizeStyle = computed(() => `width: ${editorSize.value.width}px; heig
 let app: App
 let qr: Image
 const img = shallowRef<Image>()
-let bg = Rect.one({ fill: '#fff', editable: false, zIndex: 0 }, 0, 0, editorSize.value.width, editorSize.value.height)
+const bg = Rect.one({ fill: '#fff', editable: false, zIndex: 0 }, 0, 0, editorSize.value.width, editorSize.value.height)
 
 const hasImage = computed(() => !!img.value)
 const editorRef = ref<HTMLDivElement>()
@@ -31,7 +31,8 @@ watch(
   editorRef,
   () => {
     const el = unrefElement(editorRef)
-    if (!el) return
+    if (!el)
+      return
 
     app = new App({
       view: el,
@@ -57,7 +58,7 @@ watch(
       app.editor.target = []
     })
   },
-  { flush: 'post' }
+  { flush: 'post' },
 )
 onUnmounted(() => {
   app && app.destroy()
@@ -74,7 +75,8 @@ function onImageLoad(image: Image, scale: number = 1) {
 }
 
 function uploadImage(imgFile: File) {
-  if (!app) return
+  if (!app)
+    return
 
   img.value && img.value.remove()
   qr && qr.remove()
@@ -86,14 +88,14 @@ function uploadImage(imgFile: File) {
   })
 
   img.value.once(ImageEvent.LOADED, (_: ImageEvent) => {
-    if (!img.value) return
+    if (!img.value)
+      return
 
     let scale = 1
-    if (img.value.width > EDITOR_SIZE_LIMIT.MAX_WIDTH || img.value.height > EDITOR_SIZE_LIMIT.MAX_HEIGHT) {
+    if (img.value.width > EDITOR_SIZE_LIMIT.MAX_WIDTH || img.value.height > EDITOR_SIZE_LIMIT.MAX_HEIGHT)
       scale = Math.min(EDITOR_SIZE_LIMIT.MAX_WIDTH / img.value.width, EDITOR_SIZE_LIMIT.MAX_HEIGHT / img.value.height)
-    } else if (img.value.width < EDITOR_SIZE_LIMIT.MIN_WIDTH || img.value.height < EDITOR_SIZE_LIMIT.MIN_HEIGHT) {
+    else if (img.value.width < EDITOR_SIZE_LIMIT.MIN_WIDTH || img.value.height < EDITOR_SIZE_LIMIT.MIN_HEIGHT)
       scale = Math.max(EDITOR_SIZE_LIMIT.MIN_WIDTH / img.value.width, EDITOR_SIZE_LIMIT.MIN_HEIGHT / img.value.height)
-    }
 
     img.value.scale = scale
 
@@ -143,7 +145,8 @@ onChange((files) => {
 
 const qrContent = ref('https://github.com/ArcherGu/ninja-qr')
 function createQrCode() {
-  if (!img.value) return
+  if (!img.value)
+    return
 
   QRCode.toDataURL(
     qrContent.value,
@@ -169,7 +172,8 @@ function createQrCode() {
       })
 
       qr.once(ImageEvent.LOADED, (_: ImageEvent) => {
-        if (!qr || !img.value) return
+        if (!qr || !img.value)
+          return
 
         // center the qr code
         qr.x = (editorSize.value.width - qr.width) / 2
@@ -177,7 +181,7 @@ function createQrCode() {
       })
 
       app.tree.add(qr)
-    }
+    },
   )
 }
 
@@ -185,7 +189,8 @@ const generateLoading = ref(false)
 async function generateAndDownload() {
   generateLoading.value = true
   try {
-    if (!app || !img.value || !qr) return
+    if (!app || !img.value || !qr)
+      return
 
     const scale = img.value.scale as number
     const { x, y } = qr
@@ -199,9 +204,11 @@ async function generateAndDownload() {
       x: Math.round(x * qrScale),
       y: Math.round(y * qrScale),
     })
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error)
-  } finally {
+  }
+  finally {
     generateLoading.value = false
   }
 }
@@ -210,13 +217,15 @@ async function generateAndDownload() {
 <template>
   <div class="h-full w-full flex flex-col items-center">
     <div class="flex items-center justify-center h-150px mt-100px">
-      <img :src="logo" alt="ninja" class="w-80px" />
+      <img :src="logo" alt="ninja" class="w-80px">
       <div class="text-80px ml-10px logo-name">
         <span class="text-purple-600">Ninja</span>
         <span class="text-gray-300">QR</span>
       </div>
     </div>
-    <div class="flex items-center text-white justify-center mb-20px -mt-10px">add a ninja QR code in the image</div>
+    <div class="flex items-center justify-center text-white mb-20px -mt-10px">
+      add a ninja QR code in the image
+    </div>
     <div ref="imgDropZone" :style="editorSizeStyle" class="relative">
       <div v-show="!hasImage" class="img-select-zone" @click="() => openFile()">
         <i-fluent-add-12-regular class="text-60px" />
@@ -240,7 +249,9 @@ async function generateAndDownload() {
     </div>
 
     <div class="flex items-center justify-center mt-40px">
-      <el-button size="large" plain color="#722ae1" @click="() => openFile()"> Upload Image </el-button>
+      <el-button size="large" plain color="#722ae1" @click="() => openFile()">
+        Upload Image
+      </el-button>
 
       <el-button
         size="large"

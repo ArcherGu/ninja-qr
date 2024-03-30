@@ -1,9 +1,8 @@
 const NINJA_CONTAINER_ID = 'ninja-container'
 function createNinjaContainer(): HTMLDivElement {
   const existingContainer = document.getElementById(NINJA_CONTAINER_ID)
-  if (existingContainer) {
+  if (existingContainer)
     return existingContainer as HTMLDivElement
-  }
 
   const container = document.createElement('div')
   container.id = NINJA_CONTAINER_ID
@@ -50,9 +49,8 @@ export async function createNinjaQRCodeImage(imgUrl: string, qrCodeCanvas: HTMLC
     for (let x = 0; x < qrCodeCanvas.width; x++) {
       const qrIdx = (y * qrCodeCanvas.width + x) * 4
       const imgIdx = ((y + qrPos.y) * img.width + x + qrPos.x) * 4
-      if (imgData[imgIdx] === undefined) {
+      if (imgData[imgIdx] === undefined)
         continue
-      }
 
       if (qrData[qrIdx + 3] > 0) {
         imgData[imgIdx] = (imgData[imgIdx] - 105) * 1.7
