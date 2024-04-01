@@ -215,7 +215,7 @@ async function generateAndDownload() {
 </script>
 
 <template>
-  <div class="h-full w-full flex flex-col items-center">
+  <div class="w-full flex flex-col items-center">
     <div class="flex items-center justify-center h-150px mt-100px">
       <img :src="logo" alt="ninja" class="w-80px">
       <div class="text-80px ml-10px logo-name">
@@ -237,14 +237,8 @@ async function generateAndDownload() {
 
     <div class="mt-40px">
       <el-input
-        v-model="qrContent"
-        style="width: 350px"
-        :autosize="{ minRows: 2, maxRows: 4 }"
-        type="textarea"
-        :maxlength="256"
-        show-word-limit
-        size="large"
-        placeholder="Please input QR code content"
+        v-model="qrContent" style="width: 350px" :autosize="{ minRows: 2, maxRows: 4 }" type="textarea"
+        :maxlength="256" show-word-limit size="large" placeholder="Please input QR code content"
       />
     </div>
 
@@ -254,20 +248,14 @@ async function generateAndDownload() {
       </el-button>
 
       <el-button
-        size="large"
-        plain
-        color="#722ae1"
-        :disabled="!hasImage || qrContent.length === 0"
+        size="large" plain color="#722ae1" :disabled="!hasImage || qrContent.length === 0"
         @click="createQrCode"
       >
         Add QR Code
       </el-button>
 
       <el-button
-        size="large"
-        color="#722ae1"
-        :disabled="!hasImage"
-        :loading="generateLoading"
+        size="large" color="#722ae1" :disabled="!hasImage" :loading="generateLoading"
         @click="generateAndDownload"
       >
         Generate & Download
@@ -288,9 +276,9 @@ async function generateAndDownload() {
 
 <style scoped>
 .logo-name {
-  /* // 倾斜变换 */
   @apply transform -skew-x-12;
 }
+
 .img-select-zone {
   @apply w-full h-full border-dashed border-2 border-gray-400 rounded-lg text-gray-400 cursor-pointer box-border;
   @apply flex flex-col justify-center items-center;
@@ -300,7 +288,7 @@ async function generateAndDownload() {
 }
 
 .foot {
-  @apply fixed bottom-0 left-0 w-full h-50px flex items-center justify-center text-white;
+  @apply w-full flex items-center justify-center text-white mt-40px;
 }
 
 .foot .heart {
